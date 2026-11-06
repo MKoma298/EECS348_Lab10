@@ -115,3 +115,14 @@ void swapCols(Matrix& m, int col1 = 0, int col2 = 1) {
     }
     m.print();
 }
+ void updateEl(Matrix m, int row = 0, int col = 0, int value = 100) {
+    if (row < 0 || col < 0 || row m.getSize() || col >= m.getSize()){
+        cout << "Invalid position" << endl;
+        return;
+    }
+
+    m.set(row, col, value);
+    m.print();
+
+ }    
+ 
