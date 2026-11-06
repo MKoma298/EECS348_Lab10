@@ -125,4 +125,85 @@ void swapCols(Matrix& m, int col1 = 0, int col2 = 1) {
     m.print();
 
  }    
- 
+
+ int main(int argc, char* argv[]) {
+    string filename = "input.txt";
+
+    if (argc > 1) {
+        filename = argv[1];
+    
+    ifstream file(filename);
+
+    if (!file) {
+        cout << "Error opening file" << endl;
+        return 1;
+    }
+
+    int n;
+    file >> n;
+
+    if (!file || n <= 0) {
+        cout << "Invalid matrix size" << endl;
+        return 1;
+    }
+
+    Matrix m(n), k(n);
+    int val;
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (!(file >> val)) {
+                cout << "Invalid input" << endl;
+                return 1;
+            }
+            m.set(i, j, val);
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (!(file >> val)) {
+                cout << "Invalid input" << endl;
+                return 1;
+            }
+            k.set(i, j, val);
+        }
+    }
+    file.close();
+        
+    cout << "Matrix M:" << endl;
+    m.print();
+
+    cout << "\nMatrix K:" << endl;
+    k.print();
+
+    cout << "\nM + K:" << endl;
+    Matrix sum = m + k;
+    sum.print();
+
+    cout << "\nM * K:" << endl;
+    Matrix product = m * k;
+    product.print();
+
+    cout << "\nMatrix M diagonal sum:" << endl;
+    dSums(m);
+
+    cout << "\nMatrix K diagonal sum:" << endl;
+    dSums(k);
+
+    cout << "\nMatrix M swapped rows" << endl; 
+    swapRows(m);
+
+    cout << "\nMatrix M swapped columns" << endl;
+    swapCols(m);
+
+    cout << "\nMatrix M updated element" << endl;
+    updateEl(m);
+
+    cout << "\nOriginal Matrix M:" << endl;
+    m.print();
+
+    return 0;
+
+    
+}
