@@ -100,3 +100,18 @@ void swapRows(Matrix& m, int row1 = 0, int row2 = 1) {
     }
     m.print();
 }
+void swapCols(Matrix& m, int col1 = 0, int col2 = 1) {
+    int n = m.getSize();
+
+    if (col1 < 0 || col2 < 0 || col1 >= n || col2 >= n) {
+        cout << "Invalid columns" << endl;
+        return;
+    }
+
+    for (int j = 0; j < n; j++) {
+        int temp = m.get(j, col1);
+        m.set(j, col1, m.get(j, col2));
+        m.set(j, col2, temp);
+    }
+    m.print();
+}
