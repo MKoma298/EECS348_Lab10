@@ -38,10 +38,65 @@ public:
         }
     }
 
-    Matric operator+(cibst Matrix& other) const {
+    Matrix operator+(const Matrix& other) const {
         Matrix result(n);
 
         if (n != other.n) {
             cout << "Matrices must be the same size" << endl;
+            return result;
+        }
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                result.set(i, j, get(i, j) + other.get(i, j));
+            }
+        }
+        return result;
+    }
+    Matrix operator*(const Matrix& other) const {
+        Matric result(n);
+        if (n != other.n) {
+            cout << "Matrices must be the same size" << endl;
+            return result;
+
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                int sum = 0;
+
+                for (int k = 0; k < n; k++) {
+                    sum += get (i, k) * other.get(k, j);
+                }
+            }
         }
     }
+};
+
+void dSums(const Matrix& m) {
+    int mainSum = 0;
+    int secondSum = 0;
+    int n = m.getSize();
+
+    for (int i = 0; i < n; i++) {
+        mainSum += m.get(i, i);
+        secondSum += m.get(i, n - 1 - i);
+    }
+
+    cout << "Main diagonal sum: " << mainSum << endl;
+    cout << "Secondary diagonal sum: " << secondSum << endl;
+}
+void swapRows(Matrix& m, int row1 = 0, int row2 = 1) {
+    int n = m.getSize();
+
+    if (row1 < 0 || row2 < 0 || row1 >= n || row2 >= n) {
+        cout << "Invalid rows" << endl;
+        return;
+    }
+
+    for (int j = 0; j < n; j++) {
+        int temp = m.get(row1, j);
+        m.set(row1, j, m.get(row2, j));
+        m.set(row2, j, temp);
+    }
+    m.print();
+}
